@@ -1,0 +1,95 @@
+{% comment %}
+  Renders custom line item properties fields for a product form.
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} product form id.
+
+  Usage:
+  {% render 'line-item-properties', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+
+{%- liquid
+  assign has_line_item_properties = false
+
+  # Check if product has line_item_properties metafield
+  if product.metafields.custom.line_item_properties
+    assign has_line_item_properties = true
+    assign property_fields = product.metafields.custom.line_item_properties.value
+  endif
+-%}
+
+{%- if has_line_item_properties -%}
+  <div class="product-form__line-item-properties">
+    <h3 class="form__label h4">{{ 'products.product.line_item_properties.heading' | t }}</h3>
+
+    {%- for property in property_fields -%}
+      <div class="product-form__line-item-property">
+        <label class="form__label" for="property-{{ product_form_id }}-{{ property.key | handleize }}">
+          {{ property.label }}
+          {%- if property.required -%}
+            <span aria-hidden="true">*</span>
+          {%- endif -%}
+        </label>
+
+        {%- case property.type -%}
+          {%- when 'text' -%}
+            <input
+              type="text"
+              id="property-{{ product_form_id }}-{{ property.key | handleize }}"
+              name="properties[{{ property.key }}]"
+              class="product-form__input"
+              {%- if property.required -%}
+                required
+              {%- endif -%}
+              value="{{ property.default_value | default: '' }}"
+            >
+          {%- when 'textarea' -%}
+            <textarea
+              id="property-{{ product_form_id }}-{{ property.key | handleize }}"
+              name="properties[{{ property.key }}]"
+              class="product-form__textarea"
+              {%- if property.required -%}
+                required
+              {%- endif -%}
+            >{{ property.default_value | default: '' }}</textarea>
+          {%- when 'select' -%}
+            <select
+              id="property-{{ product_form_id }}-{{ property.key | handleize }}"
+              name="properties[{{ property.key }}]"
+              class="product-form__select"
+              {%- if property.required -%}
+                required
+              {%- endif -%}
+            >
+              {% if property.required != true %}
+                <option value="">{{ 'products.product.line_item_properties.choose' | t }}</option>
+              {% endif %}
+              {% for option in property.options %}
+                <option
+                  value="{{ option.value }}"
+                  {% if property.default_value == option.value %}
+                    selected
+                  {% endif %}
+                >
+                  {{ option.label }}
+                </option>
+              {% endfor %}
+            </select>
+          {%- when 'checkbox' -%}
+            <input
+              type="checkbox"
+              id="property-{{ product_form_id }}-{{ property.key | handleize }}"
+              name="properties[{{ property.key }}]"
+              class="product-form__checkbox"
+              value="{{ property.value | default: 'Yes' }}"
+              {%- if property.default_value == true -%}
+                checked
+              {%- endif -%}
+            >
+        {%- endcase -%}
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endif -%}

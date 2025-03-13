@@ -1,0 +1,19 @@
+{
+  "name": "dawn",
+  "version": "1.0.0",
+  "description": "Shopify Dawn theme",
+  "private": true,
+  "scripts": {
+    "dev": "shopify theme dev",
+    "push": "shopify theme push",
+    "pull": "shopify theme pull",
+    "preview": "shopify theme open --preview",
+    "test": "shopify theme check"
+  },
+  "keywords": [
+    "shopify",
+    "theme"
+  ],
+  "author": "",
+  "license": "MIT"
+} 

@@ -1492,3 +1492,46 @@ a.product__text {
     border: none;
   }
 }
+
+/* Line Item Properties */
+.product-form__line-item-properties {
+  margin-bottom: 1.5rem;
+}
+
+.product-form__line-item-property {
+  margin-bottom: 1rem;
+}
+
+.product-form__line-item-property label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.product-form__input,
+.product-form__textarea,
+.product-form__select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 4px;
+  background-color: transparent;
+  color: rgb(var(--color-foreground));
+  font-size: 1.4rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.product-form__input:focus,
+.product-form__textarea:focus,
+.product-form__select:focus {
+  border-color: rgba(var(--color-foreground), 0.5);
+  outline: none;
+}
+
+.product-form__textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.product-form__checkbox {
+  margin-right: 0.5rem;
+}

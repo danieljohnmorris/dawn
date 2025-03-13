@@ -1,0 +1,49 @@
+{
+  "namespace": "custom",
+  "key": "line_item_properties",
+  "value": [
+    {
+      "key": "engraving",
+      "label": "Add Engraving",
+      "type": "text",
+      "required": false,
+      "default_value": ""
+    },
+    {
+      "key": "gift_message",
+      "label": "Gift Message",
+      "type": "textarea",
+      "required": false,
+      "default_value": ""
+    },
+    {
+      "key": "size",
+      "label": "Size",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default_value": "medium"
+    },
+    {
+      "key": "gift_wrap",
+      "label": "Add Gift Wrapping",
+      "type": "checkbox",
+      "value": "Yes",
+      "default_value": false
+    }
+  ],
+  "type": "json"
+} 
